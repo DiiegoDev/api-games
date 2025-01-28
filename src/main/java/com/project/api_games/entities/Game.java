@@ -26,6 +26,8 @@ public class Game {
   @Column(columnDefinition = "TEXT")
   private String longDescription;
 
+  public Game() {}
+
   public Game(
       UUID id,
       String title,
@@ -48,8 +50,6 @@ public class Game {
     this.shortDescription = shortDescription;
     this.longDescription = longDescription;
   }
-
-  public Game() {}
 
   public UUID getId() {
     return id;
