@@ -2,7 +2,7 @@ package com.project.api_games.exceptions;
 
 public class GameNotFound extends RuntimeException {
   public GameNotFound() {
-    super("Não foi possivel encontrar este joga em nossa base de dados");
+    super("Não foi possível encontrar este jogo em nossa base de dados");
   }
 
   public GameNotFound(String message) {
