@@ -1,6 +1,7 @@
 package com.project.api_games.dtos;
 
 import com.project.api_games.entities.Game;
+import com.project.api_games.projections.GameMinProjection;
 
 import java.util.UUID;
 
@@ -19,6 +20,14 @@ public class GameMinDTO {
     year = entity.getYear();
     imgUrl = entity.getImgUrl();
     shortDescription = entity.getShortDescription();
+  }
+
+  public GameMinDTO(GameMinProjection projection) {
+    id = projection.getGameId();
+    title = projection.getTitle();
+    year = projection.getYear();
+    imgUrl = projection.getImgUrl();
+    shortDescription = projection.getShortDescription();
   }
 
   public UUID getId() {
