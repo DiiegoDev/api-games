@@ -3,14 +3,13 @@ package com.project.api_games.entities;
 import jakarta.persistence.*;
 
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity(name = "game")
 @Table(name = "game")
 public class Game {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  private String id;
   private String title;
 
   @Column(name = "game_year")
@@ -29,7 +28,7 @@ public class Game {
   public Game() {}
 
   public Game(
-      UUID id,
+      String id,
       String title,
       Integer year,
       String genre,
@@ -51,11 +50,11 @@ public class Game {
     this.longDescription = longDescription;
   }
 
-  public UUID getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(String id) {
     this.id = id;
   }
 
