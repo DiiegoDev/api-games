@@ -2,7 +2,6 @@ package com.project.api_games.services;
 
 import com.project.api_games.dtos.GameListDTO;
 import com.project.api_games.dtos.GameMinDTO;
-import com.project.api_games.entities.Game;
 import com.project.api_games.entities.GameList;
 import com.project.api_games.exceptions.GameListNotFound;
 import com.project.api_games.projections.GameMinProjection;
@@ -37,15 +36,30 @@ public class GameListService {
 
     if(gameListExisted.isEmpty()) throw new GameListNotFound();
 
-    List<GameMinProjection> response = this.gameRepository.searchByList(id);
+    List<GameMinProjection> response = this.gameRepository.searchByList(id.toString());
 
     return response.stream().map(GameMinDTO::new).toList();
   }
 
   @Transactional(readOnly = true)
   public Optional<GameList> findListById(UUID id) {
-    Optional<GameList> response = this.gameListRepository.findById(id);
+    Optional<GameList> response = this.gameListRepository.findById(id.toString());
 
     return response;
+  }
+
+  @Transactional(readOnly = true)
+  public void UpdatePosition(UUID listId, int sourceIndex, int destinationIndex) {
+    List<GameMinProjection> list = this.gameRepository.searchByList(listId.toString());
+
+    GameMinProjection obj = list.remove(sourceIndex);
+    list.add(destinationIndex, obj);
+
+    int min = Math.min(sourceIndex, destinationIndex);
+    int max = Math.max(sourceIndex, destinationIndex);
+
+    for(int i = min; i <= max; i++) {
+      this.gameListRepository.updateBelongingPosition(listId.toString(), list.get(i).getId(), i);
+    }
   }
 }
