@@ -27,7 +27,7 @@ public class GameService {
 
   @Transactional(readOnly = true)
   public GameDTO findById(UUID id) {
-    Optional<Game> response = this.gameRepository.findById(id);
+    Optional<Game> response = this.gameRepository.findById(id.toString());
 
     if(response.isEmpty()) throw new GameNotFound();
 
