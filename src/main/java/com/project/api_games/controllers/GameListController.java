@@ -2,13 +2,11 @@ package com.project.api_games.controllers;
 
 import com.project.api_games.dtos.GameListDTO;
 import com.project.api_games.dtos.GameMinDTO;
+import com.project.api_games.dtos.ReplacementDTO;
 import com.project.api_games.services.GameListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -32,4 +30,11 @@ public class GameListController {
 
     return ResponseEntity.ok().body(response);
   }
+
+  @PostMapping("/{listId}/replacement")
+  public  ResponseEntity<Void> updatePosition(@PathVariable UUID listId, @RequestBody ReplacementDTO body) {
+    this.gameListService.UpdatePosition(listId, body.getSourceIndex(), body.getDestinationIndex());
+    return ResponseEntity.ok().build();
+  }
+
 }
