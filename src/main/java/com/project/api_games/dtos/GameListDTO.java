@@ -2,10 +2,8 @@ package com.project.api_games.dtos;
 
 import com.project.api_games.entities.GameList;
 
-import java.util.UUID;
-
 public class GameListDTO {
-  private UUID id;
+  private String id;
   private String name;
 
   public GameListDTO(GameList entity) {
@@ -13,7 +11,7 @@ public class GameListDTO {
     name = entity.getName();
   }
 
-  public UUID getId() {
+  public String getId() {
     return id;
   }
 

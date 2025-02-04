@@ -6,9 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.UUID;
 
-public interface GameRepository extends JpaRepository<Game, UUID> {
+public interface GameRepository extends JpaRepository<Game, String> {
   @Query(nativeQuery = true, value = """
 		SELECT game.id, game.title, game.game_year AS `year`, game.img_url AS imgUrl,
 		game.short_description AS shortDescription, belonging.position
@@ -17,5 +16,5 @@ public interface GameRepository extends JpaRepository<Game, UUID> {
 		WHERE belonging.game_list_id = :listId
 		ORDER BY belonging.position
 			""")
-	List<GameMinProjection> searchByList(UUID listId);
+	List<GameMinProjection> searchByList(String listId);
 }

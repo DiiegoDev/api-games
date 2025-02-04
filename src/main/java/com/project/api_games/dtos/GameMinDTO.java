@@ -3,10 +3,8 @@ package com.project.api_games.dtos;
 import com.project.api_games.entities.Game;
 import com.project.api_games.projections.GameMinProjection;
 
-import java.util.UUID;
-
 public class GameMinDTO {
-  private UUID id;
+  private String id;
   private String title;
   private Integer year;
   private String imgUrl;
@@ -23,14 +21,14 @@ public class GameMinDTO {
   }
 
   public GameMinDTO(GameMinProjection projection) {
-    id = projection.getGameId();
+    id = projection.getId();
     title = projection.getTitle();
     year = projection.getYear();
     imgUrl = projection.getImgUrl();
     shortDescription = projection.getShortDescription();
   }
 
-  public UUID getId() {
+  public String getId() {
     return id;
   }
 
